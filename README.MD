@@ -35,7 +35,3 @@ go run setupadmin/setupadmin.go "username"
 
 - Pouvoir demander à rejoindre l'équipe de modérateurs.
 - Pouvoir modéré les threads et les éditer.
-
-## Schéma de la Data Base
-
-![Schéma Data Base](Forum_db.png)
