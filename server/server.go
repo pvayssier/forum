@@ -8,10 +8,10 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-var url = "localhost:8080"
+var url = ":8080"
 
 func main() {
-	css, img, ico := http.FileServer(http.Dir("view/")), http.FileServer(http.Dir("Avatar/")), http.FileServer(http.Dir("assets/"))
+	css, img, ico := http.FileServer(http.Dir("/app/view/")), http.FileServer(http.Dir("/app/Avatar/")), http.FileServer(http.Dir("/app/assets/"))
 	f.Init()
 	http.Handle("/view/", http.StripPrefix("/view/", css))
 	http.Handle("/Avatar/", http.StripPrefix("/Avatar/", img))

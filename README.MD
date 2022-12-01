@@ -14,7 +14,7 @@ git clone https://git.ytrack.learn.ynov.com/LGRAND-MORCEL/forum.git
 Et d'ensuite aller dans le fichier `FORUM` et faire :
 
 ```bash
-go run serveur/serveur.go
+go run server/server.go
 ```
 
 Une fois ces commandes faites, vous pourrez immédiatement ouvrir votre navigateur et accéder au site en tapant [`http://localhost:8080`](http://localhost:8080). Vous allez arriver sur la page d'accueil ou vous trouverez tous les threads récents ainsi que des boutons pour créer un compte ou se connecter si vous possédez déjà un compte.
@@ -35,3 +35,7 @@ go run setupadmin/setupadmin.go "username"
 
 - Pouvoir demander à rejoindre l'équipe de modérateurs.
 - Pouvoir modéré les threads et les éditer.
+
+## Schéma de la Data Base
+
+![Schéma Data Base](Forum_db.png)
