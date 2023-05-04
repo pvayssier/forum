@@ -3,7 +3,7 @@ module forum
 go 1.18
 
 require (
-	github.com/mattn/go-sqlite3 v1.14.12
+	github.com/go-sql-driver/mysql v1.7.0
 	golang.org/x/crypto v0.0.0-20220331220935-ae2d96664a29
 )
 

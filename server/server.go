@@ -5,13 +5,13 @@ import (
 	f "forum"
 	"net/http"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var url = ":8080"
 
 func main() {
-	css, img, ico := http.FileServer(http.Dir("/app/view/")), http.FileServer(http.Dir("/app/Avatar/")), http.FileServer(http.Dir("/app/assets/"))
+	css, img, ico := http.FileServer(http.Dir("view/")), http.FileServer(http.Dir("Avatar/")), http.FileServer(http.Dir("assets/"))
 	f.Init()
 	http.Handle("/view/", http.StripPrefix("/view/", css))
 	http.Handle("/Avatar/", http.StripPrefix("/Avatar/", img))
@@ -32,7 +32,7 @@ func main() {
 	http.HandleFunc("/edit/", f.Edit)
 	http.HandleFunc("/createCategorie", f.CreateCategorie)
 	http.HandleFunc("/acceptMod", f.AcceptMod)
-	fmt.Println("Listening at http://" + url)
+	fmt.Println("Listening at http://10.211.55.28" + url)
 	err := http.ListenAndServe(url, nil)
 	if err != nil {
 		fmt.Println(err)

@@ -9,7 +9,7 @@ import (
 	"text/template"
 )
 
-var t = template.Must(template.ParseGlob("/app/view/*.html"))
+var t = template.Must(template.ParseGlob("view/*.html"))
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	var template TemplatePost

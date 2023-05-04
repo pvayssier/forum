@@ -40,8 +40,6 @@ const handleLike = (table, id) => {
             })
         })
         .catch(error => alert("Erreur : " + error));
-    console.log(request);
-
 }
 
 const handleDislike = (table, id) => {

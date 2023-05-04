@@ -3,8 +3,7 @@ package forum
 import (
 	"net/http"
 	"strconv"
-
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func GetNbrComment(post_id int) int {
@@ -77,7 +76,7 @@ func IsUser(Username string, password string) bool {
 
 func IsOwner(Post_id int, User_id int) bool {
 	var nbr int
-	db.QueryRow("SELECT EXicount(*) FROM Post WHERE User_id = ? AND Id = ?", User_id, Post_id).Scan(&nbr)
+	db.QueryRow("SELECT count(*) FROM Post WHERE User_id = ? AND Id = ?", User_id, Post_id).Scan(&nbr)
 	return nbr > 0
 }
 func GetPostId(Comment_id int) int {
@@ -173,7 +172,7 @@ func GetAllUserInfo(User_id int) UserInfo {
 
 func GetReport() ReportInfo {
 	var ReportInfo ReportInfo
-	rows, _ := db.Query("SELECT Post.*,User.Username FROM Post JOIN ReportPost,User ON Post.Id = ReportPost.Post_id AND Post.User_id = User.Id ")
+	rows, _ := db.Query("SELECT Post.*,User.Username FROM Post JOIN ReportPost ON Post.Id = ReportPost.Post_id JOIN User ON Post.User_id = User.Id ")
 	for rows.Next() {
 		var Post Post
 		rows.Scan(&Post.Id, &Post.User_id, &Post.Title, &Post.Text, &Post.CreatedAt, &Post.UpdatedAt, &Post.Username)
@@ -182,7 +181,7 @@ func GetReport() ReportInfo {
 		Post.NbrComments = GetNbrComment(Post.Id)
 		ReportInfo.ReportPosts = append(ReportInfo.ReportPosts, Post)
 	}
-	rows, _ = db.Query("SELECT Comment.*,User.Username FROM Comment JOIN ReportComment,User ON Comment.Id = ReportComment.Comment_id AND Comment.User_id = User.Id ")
+	rows, _ = db.Query("SELECT Comment.*,User.Username FROM Comment JOIN ReportComment ON Comment.Id = ReportComment.Post_id JOIN User ON Comment.User_id = User.Id ")
 	for rows.Next() {
 		var Comment Comment
 		rows.Scan(&Comment.Id, &Comment.Post_id, &Comment.User_id, &Comment.Text, &Comment.CreatedAt, &Comment.Username)
